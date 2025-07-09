@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录 | 安全演示系统</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4a6cf7;
+            --primary-hover: #3a5ce4;
+            --error-color: #ff4444;
+            --text-color: #2d3748;
+            --light-gray: #f8f9fa;
+            --border-color: #e2e8f0;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: var(--text-color);
+        }
+        
+        .login-container {
+            width: 100%;
+            max-width: 400px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        
+        .login-header {
+            background: var(--primary-color);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+        
+        .login-header h1 {
+            font-size: 24px;
+            font-weight: 500;
+            margin: 0;
+        }
+        
+        .login-form {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: var(--text-color);
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 15px;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(74, 108, 247, 0.2);
+        }
+        
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 12px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+        
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            font-size: 14px;
+            margin-top: 15px;
+            text-align: center;
+        }
+        
+        .footer-text {
+            text-align: center;
+            margin-top: 20px;
+            color: #718096;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .login-container {
+                margin: 0 15px;
+            }
+            
+            .login-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>欢迎回来</h1>
+        </div>
+        <form class="login-form" th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">用户名</label>
+                <input type="text" 
+                       id="username" 
+                       name="username" 
+                       class="form-control" 
+                       placeholder="请输入用户名"
+                       required
+                       autofocus>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">密码</label>
+                <input type="password" 
+                       id="password" 
+                       name="password" 
+                       class="form-control" 
+                       placeholder="请输入密码"
+                       required>
+            </div>
+            
+            <button type="submit" class="btn">登 录</button>
+            
+            <div th:if="${param.error}" class="error-message">
+                用户名或密码错误
+            </div>
+            
+            <div class="footer-text">
+                没有账号？<a href="#" style="color: var(--primary-color); text-decoration: none;">联系管理员</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
